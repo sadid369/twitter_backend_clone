@@ -1,5 +1,5 @@
 const Tweet = require("../models/tweet");
-
+const CrudRepository = require("./crud-repository");
 class TweetRepository extends CrudRepository {
     constructor() {
         super(Tweet);
