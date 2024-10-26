@@ -1,4 +1,7 @@
 class CrudRepository {
+    constructor(model) {
+        this.model = model;
+    }
     async create (data) {
         try {
             const result = await this.model.create(data);
@@ -8,7 +11,7 @@ class CrudRepository {
             throw error;
         }
     }
-    async getAllTweets () {
+    async getAll () {
         try {
             const results = await this.model.find();
             return results;
@@ -17,7 +20,7 @@ class CrudRepository {
             throw error;
         }
     }
-    async getTweet (id) {
+    async get (id) {
         try {
             const result = await this.model.findById(id);
             return result;
@@ -26,7 +29,7 @@ class CrudRepository {
             throw error;
         }
     }
-    async deleteTweet (id) {
+    async destroy (id) {
         try {
             const result = await this.model.findByIdAndDelete(id);
             return result;
@@ -35,6 +38,15 @@ class CrudRepository {
             throw error;
         }
     }
+    async update (id, data) {
+        try {
+            const result = await this.model.findByIdAndUpdate(id, data, { new: true });
+            return result;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 }
 
-module.exports = new TweetRepository();
+module.exports = CrudRepository;
